@@ -209,8 +209,8 @@ Via l'API VAPI (`POST https://api.vapi.ai/assistant`), crée l'agent avec :
 - `model.model` : claude-3-5-sonnet-20241022
 - `model.systemPrompt` : contenu de `vapi_system_prompt.md`
 - `model.tools` : définition complète de chaque outil confirmé en Phase 2 (voir format ci-dessous)
-- `voice.provider` : 11labs, voiceId : sarah
-- `transcriber` : deepgram, nova-2
+- `voice.provider` : 11labs, voiceId : sarah, model : eleven_multilingual_v2
+- `transcriber` : deepgram, nova-3, language : multi
 
 **Format requis pour chaque outil dans `model.tools` :**
 ```json
