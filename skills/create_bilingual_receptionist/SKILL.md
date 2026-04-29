@@ -68,7 +68,7 @@ Attends confirmation avant de continuer.
 
 ## PHASE 3 — Générer le system prompt VAPI
 
-Lis le fichier `${CLAUDE_PLUGIN_ROOT}/templates/bilingual_receptionist/prompt_engineering.md` pour connaître la structure exacte et les règles fixes du prompt.
+Lis le fichier `${CLAUDE_PLUGIN_ROOT}/skills/create_bilingual_receptionist/references/prompt_engineering.md` pour connaître la structure exacte et les règles fixes du prompt.
 
 Génère le system prompt complet en adaptant les sections avec :
 - Les infos business collectées en Phase 1
