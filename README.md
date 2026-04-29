@@ -5,7 +5,7 @@ Ce skill Claude Code génère un agent vocal bilingue FR/EN complet pour une com
 ## Ce que le skill crée
 
 - **Agent VAPI** avec system prompt structuré (7 sections)
-- **Serveur Flask** sur Railway avec endpoint `/tools` (dispatch des outils) et `/webhook` (transcriptions)
+- **Serveur Flask** sur Railway avec endpoint `/tools` et `/webhook`
 - **8 outils Python** : gestion clients (CRM Google Sheets), disponibilités (Google Calendar), réservations, SMS Twilio
 - **Workflows WAT** documentés en Markdown
 - **Google Sheet CRM** avec 3 feuilles : Clients, Reservations, transcriptions
@@ -17,19 +17,36 @@ Ce skill Claude Code génère un agent vocal bilingue FR/EN complet pour une com
 
 ## Installation
 
-```bash
-# Copier le skill dans Claude Code
-cp create_bilingual_receptionist.md ~/.claude/commands/
+**Option 1 — Via Claude Code (recommandé)**
 
-# Copier le template de prompt engineering
-mkdir -p ~/.claude/commands/templates/bilingual_receptionist
-cp templates/bilingual_receptionist/prompt_engineering.md ~/.claude/commands/templates/bilingual_receptionist/
-cp templates/bilingual_receptionist/server.py ~/.claude/commands/templates/bilingual_receptionist/
+Ouvre Claude Code dans n'importe quel dossier et écris :
+
 ```
+Installe ce skill : https://github.com/camaracine01-rgb/skill_receptionniste_IA
+```
+
+Claude Code installe automatiquement le skill.
+
+**Option 2 — Via le gestionnaire de plugins**
+
+Ajoute ce marketplace dans `~/.claude/settings.json` :
+
+```json
+"extraKnownMarketplaces": {
+  "receptionniste-ia": {
+    "source": {
+      "source": "github",
+      "repo": "camaracine01-rgb/skill_receptionniste_IA"
+    }
+  }
+}
+```
+
+Puis ouvre le gestionnaire de plugins Claude Code et installe `create_bilingual_receptionist`.
 
 ## Utilisation
 
-Dans un nouveau projet vide, lance Claude Code et tape :
+Dans un nouveau projet vide, tape :
 
 ```
 /create_bilingual_receptionist

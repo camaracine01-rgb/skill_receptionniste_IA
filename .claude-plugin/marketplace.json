@@ -1,0 +1,17 @@
+{
+  "name": "receptionniste-ia",
+  "owner": { "name": "camaracine01-rgb" },
+  "metadata": {
+    "description": "Skill Claude Code pour créer un agent vocal bilingue FR/EN complet avec VAPI, Google Sheets, Google Calendar et Twilio."
+  },
+  "plugins": [
+    {
+      "name": "create_bilingual_receptionist",
+      "source": "./",
+      "description": "Construit un agent vocal bilingue FR/EN complet (VAPI + Google Sheets + Google Calendar + Twilio + Railway) en 6 phases guidées.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["vapi", "voice-agent", "receptionist", "twilio", "google-calendar"]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "create_bilingual_receptionist",
+  "description": "Construit un agent vocal bilingue FR/EN complet (VAPI + Google Sheets + Google Calendar + Twilio + Railway) en 6 phases guidées.",
+  "version": "1.0.0",
+  "author": {
+    "name": "camaracine01-rgb",
+    "homepage": "https://github.com/camaracine01-rgb/skill_receptionniste_IA"
+  },
+  "repository": "https://github.com/camaracine01-rgb/skill_receptionniste_IA",
+  "license": "MIT"
+}
