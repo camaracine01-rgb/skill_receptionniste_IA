@@ -1,10 +1,10 @@
 ---
 name: creer_receptionniste_ia
-description: Builds a complete bilingual FR/EN voice AI receptionist using VAPI, Google Sheets, Google Calendar, and Twilio, deployed on Railway.
+description: Builds a complete bilingual FR/EN voice AI receptionist using VAPI, Google Sheets, Google Calendar, and Twilio, deployed on Railway. Use this skill when asked to create a voice receptionist, AI receptionist, VAPI agent, or bilingual voice agent.
 ---
 
 
-# Skill : creer_receptionniste_ia
+# Skill : create_bilingual_receptionist
 
 Tu vas construire un agent vocal bilingue (FR/EN) complet pour une compagnie de services, en suivant le framework WAT déjà en place dans ce projet (CLAUDE.md).
 
@@ -94,11 +94,36 @@ Crée dans l'ordre (adapte avec le nom de la compagnie et les vraies infos) :
 - `nixpacks.toml` avec build pip et start python server.py
 - `runtime.txt` : python-3.13.0
 - `.gitignore` : exclure .env, .tmp/, credentials.json, token.json, __pycache__, .venv, .DS_Store
-- `.env.example` avec toutes les variables nécessaires (voir Phase 5)
+- `.env.example` avec exactement cette structure :
+
+```
+# ── Variables Railway (à ajouter dans Railway → Variables) ────────────────────
+VAPI_API_KEY=
+VAPI_ASSISTANT_ID=          # rempli après création de l'agent VAPI
+
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE_NUMBER=
+
+GOOGLE_SERVICE_ACCOUNT_JSON=   # JSON minifié sur une seule ligne
+GOOGLE_SHEET_ID=
+GOOGLE_CALENDAR_ID=
+
+COMPANY_NAME=
+COMPANY_TIMEZONE=America/Toronto
+DEFAULT_LANGUAGE=fr
+
+PORT=5000
+ENVIRONMENT=development
+
+# ── Variable locale uniquement (ne pas mettre dans Railway) ───────────────────
+# RAILWAY_WEBHOOK_URL = URL générée par Railway après déploiement
+# → utilisée localement pour créer l'agent VAPI via l'API
+RAILWAY_WEBHOOK_URL=
+```
 
 ### 4b — Serveur Flask
-Copie et adapte le template depuis `~/.claude/commands/templates/bilingual_receptionist/server.py`.
-Le dispatcher doit inclure tous les outils confirmés en Phase 2.
+Génère un serveur Flask avec un dispatcher dynamique incluant tous les outils confirmés en Phase 2.
 
 ### 4c — Outils (`tools/`)
 Crée `tools/__init__.py` vide.
@@ -179,11 +204,13 @@ Arrête-toi et donne ces instructions à l'utilisateur dans l'ordre. Explique ch
 **Étape C — Railway**
 1. Aller sur railway.app → New Project → Deploy from GitHub
 2. Sélectionner le repo créé en Phase 4e
-3. Ajouter toutes les variables du `.env.example` dans Railway → Variables
-4. Copier l'URL de déploiement Railway
+3. Ajouter dans Railway → Variables **toutes les variables du `.env.example` SAUF `RAILWAY_WEBHOOK_URL`** (voir note ci-dessous)
+4. Copier l'URL de déploiement Railway (ex: `https://xxx.up.railway.app`)
+
+⚠️ `RAILWAY_WEBHOOK_URL` n'est PAS une variable à mettre dans Railway — c'est l'URL que Railway te génère. Tu la copies dans ton `.env` local (Étape D) pour qu'on puisse créer l'agent VAPI.
 
 **Étape D — Remplir le .env**
-Copier `.env.example` en `.env` et remplir toutes les valeurs.
+Copier `.env.example` en `.env` et remplir toutes les valeurs, y compris `RAILWAY_WEBHOOK_URL` avec l'URL obtenue à l'Étape C.
 
 ⚠️ Le JSON du Service Account doit être sur UNE SEULE ligne (minifié) dans le .env.
 
@@ -197,16 +224,16 @@ Quand l'utilisateur revient avec le .env complété :
 
 ### 6a — Initialiser Google Sheets
 ```bash
-python -m tools.init_sheets
+python3 -m tools.init_sheets
 ```
-Vérifie que les feuilles Clients et Reservations sont créées avec les bons en-têtes.
+Vérifie que les feuilles Clients, Reservations et transcriptions sont créées avec les bons en-têtes.
 
 ### 6b — Créer l'agent VAPI
 Via l'API VAPI (`POST https://api.vapi.ai/assistant`), crée l'agent avec :
 - `name` : le prénom de l'agente (Phase 1)
 - `firstMessage` : message d'accueil bilingue adapté à la compagnie
-- `model.provider` : anthropic
-- `model.model` : claude-3-5-sonnet-20241022
+- `model.provider` : openai
+- `model.model` : gpt-4.1
 - `model.systemPrompt` : contenu de `vapi_system_prompt.md`
 - `model.tools` : définition complète de chaque outil confirmé en Phase 2 (voir format ci-dessous)
 - `voice.provider` : 11labs, voiceId : sarah, model : eleven_multilingual_v2
