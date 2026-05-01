@@ -1,5 +1,5 @@
 {
-  "name": "create_bilingual_receptionist",
+  "name": "creer_receptionniste_ia",
   "description": "Construit un agent vocal bilingue FR/EN complet (VAPI + Google Sheets + Google Calendar + Twilio + Railway) en 6 phases guidées.",
   "version": "1.0.0",
   "author": {

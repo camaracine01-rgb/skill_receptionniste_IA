@@ -1,10 +1,10 @@
 ---
-name: create_bilingual_receptionist
+name: creer_receptionniste_ia
 description: Builds a complete bilingual FR/EN voice AI receptionist using VAPI, Google Sheets, Google Calendar, and Twilio, deployed on Railway.
 ---
 
 
-# Skill : create_bilingual_receptionist
+# Skill : creer_receptionniste_ia
 
 Tu vas construire un agent vocal bilingue (FR/EN) complet pour une compagnie de services, en suivant le framework WAT déjà en place dans ce projet (CLAUDE.md).
 
@@ -68,7 +68,7 @@ Attends confirmation avant de continuer.
 
 ## PHASE 3 — Générer le system prompt VAPI
 
-Lis le fichier `${CLAUDE_PLUGIN_ROOT}/skills/create_bilingual_receptionist/references/prompt_engineering.md` pour connaître la structure exacte et les règles fixes du prompt.
+Lis le fichier `${CLAUDE_PLUGIN_ROOT}/skills/creer_receptionniste_ia/references/prompt_engineering.md` pour connaître la structure exacte et les règles fixes du prompt.
 
 Génère le system prompt complet en adaptant les sections avec :
 - Les infos business collectées en Phase 1
